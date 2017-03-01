@@ -163,7 +163,7 @@ blockquote {
 
 ul {
     list-style-type: none;
-    margin-left: 100px;
+    margin-left: 0px;
     padding-left: 0;
     overflow: hidden;
     background-color: #333;
