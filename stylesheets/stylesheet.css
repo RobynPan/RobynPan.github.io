@@ -163,7 +163,7 @@ blockquote {
 
 ul {
     list-style-type: none;
-    margin-left: 100;
+    margin-left: 100px;
     padding-left: 0;
     overflow: hidden;
     background-color: #333;
@@ -171,7 +171,7 @@ ul {
 
 li {
     float: left;
-    margin-left:300px;
+    margin-left: 0px;
 }
 
 li a {
