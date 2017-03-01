@@ -318,17 +318,12 @@ header {
 }
 
 #main_content {
-  margin-left: 100px;
-  padding-left: 0px;
+  padding-top: 40px;
 }
 
-#main_content.outer {
-  padding-left: 200px;
-}
 #main_content.inner {
   background-color: #fff;
-  padding: 50px 100px;
-  padding-bottom: 100;
+  padding: 70px 100px;
   box-shadow: 0 0 5px #ebebeb;
   -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   -moz-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
