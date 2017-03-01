@@ -171,6 +171,7 @@ ul {
 
 li {
     float: left;
+    margin-left:80px;
 }
 
 li a {
