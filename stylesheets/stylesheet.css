@@ -318,8 +318,7 @@ header {
 
 #main_content {
   margin: 80px;
-  padding-top: 40px;
-  padding-left: 150px;
+  padding: 20px 100px;
 }
 
 #main_content.inner {
