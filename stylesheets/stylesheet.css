@@ -340,6 +340,10 @@ Small Device Styles
   img {
     max-width: 100%;
   }
+ 
+  .navbar {
+        padding: 0 20px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -351,6 +355,10 @@ Small Device Styles
     display: none;
   }
 
+   .navbar {
+        padding: 0 20px;
+    }
+  
   .outer {
     padding: 0;
   }
