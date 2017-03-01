@@ -319,7 +319,7 @@ header {
 
 #main_content {
   margin: 0px;
-  padding-left: 0px;
+  padding-left: 100px;
 }
 
 #main_content.outer {
