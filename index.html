@@ -22,7 +22,34 @@
         <header class="inner">
           <!-- <a id="forkme_banner" href="repository_url}}">View on GitHub</a> -->
           
-          <img alt="Robyn Pan!" src="https://68.media.tumblr.com/a1e3c32388073dcfa5e3c72638a6f103/tumblr_om746vBBBy1tucmhwo1_1280.jpg" width="200" height="200" style="float: right;" />
+          
+                  <script type="text/javascript">
+            var picPaths = ['Robyn.jpeg', 'https://68.media.tumblr.com/a1e3c32388073dcfa5e3c72638a6f103/tumblr_om746vBBBy1tucmhwo1_1280.jpg'];
+            var curPic = -1;
+            //preload the images for smooth animation
+            var imgO = new Array();
+            for(i=0; i < picPaths.length; i++) {
+                imgO[i] = new Image();
+                imgO[i].src = picPaths[i];
+            }
+
+            function swapImage() {
+                curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+                imgCont.src = imgO[curPic].src;
+                setTimeout(swapImage,2000);
+            }
+
+            window.onload=function() {
+                imgCont = document.getElementById('imgBanner');
+                swapImage();
+            }
+        </script>
+          
+          
+          <div>
+            <img id="imgBanner" src="" alt="" width="200" height="200" style="float: right;" />
+        </div>
+          <img alt="Robyn Pan!" src=" />
           <h1><a href="index.html" id="project_title">Robyn Pan</a></h1>   <h2 id="project_tagline"></h2>
           
     <br><br><br><br><br><br><br>
