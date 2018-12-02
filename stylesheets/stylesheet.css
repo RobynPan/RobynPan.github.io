@@ -27,8 +27,15 @@ Theme Styles
 }
 
 /* Instagram */
-.fa-instagram {
-    background: #FFFFFF;
+.fa-instagram {  
+    background: #f09433; 
+    color: white;
+}
+
+
+/* Email */
+.fa-envelope {  
+    background: #f00003; 
     color: white;
 }
 
