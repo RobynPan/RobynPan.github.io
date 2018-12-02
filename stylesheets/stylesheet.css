@@ -11,7 +11,7 @@ Theme Styles
 *******************************************************************************/
 
 .fa {
-    padding: 5px;
+    padding: 10px;
     font-size: 30px;
     width: 30px;
     height: 30px;
@@ -39,7 +39,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', end
 
 /* Email */
 .fa-envelope {  
-    background: #f00003; 
+    background: #B8B8B8; 
     color: white;
 }
 
