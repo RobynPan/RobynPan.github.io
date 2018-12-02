@@ -11,12 +11,24 @@ Theme Styles
 *******************************************************************************/
 
 .fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 30px;
+    padding: 50px;
+    font-size: 40px;
+    width: 50px;
     text-align: center;
     text-decoration: none;
     border-radius: 50%;
+}
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
 }
 
 *, *:before, *:after {
