@@ -1,232 +1,659 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robyn Pan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <style>
+    :root {
+      --ink:    #1a1208;
+      --paper:  #f5f0e8;
+      --cream:  #ede7d3;
+      --rust:   #c4541a;
+      --sage:   #6b7c5c;
+      --muted:  #8a7f6e;
+      --border: rgba(26,18,8,0.15);
+    }
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="The Official Website Of Robyn Pan" />
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./robynsjavascriptfile.js">
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    
-<title>Robyn Pan</title>
-  </head>
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
 
-  <body background="https://68.media.tumblr.com/57cb271828a98a44c0bc7baee3787b01/tumblr_om5ufvPshC1si9utco1_1280.jpg">
- 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          
-          
-                  <script type="text/javascript">
-            var picPaths = ['Robynsquare.jpg', 'Robynsquare2.jpg', 'Robyn3.jpg', 'https://68.media.tumblr.com/a1e3c32388073dcfa5e3c72638a6f103/tumblr_om746vBBBy1tucmhwo1_1280.jpg'];
-            var curPic = -1;
-            //preload the images for smooth animation
-            var imgO = new Array();
-            for(i=0; i < picPaths.length; i++) {
-                imgO[i] = new Image();
-                imgO[i].src = picPaths[i];
-            }
+    /* HEADER */
+    #site-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      padding: 2.5rem 4rem 2rem;
+      border-bottom: 1px solid var(--ink);
+    }
 
-            function swapImage() {
-                curPic = (++curPic > picPaths.length-1)? 0 : curPic;
-                imgCont.src = imgO[curPic].src;
-                setTimeout(swapImage,20000);
-            }
+    .site-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+    }
+    .site-name em { font-style: italic; color: var(--rust); }
 
-            window.onload=function() {
-                imgCont = document.getElementById('imgBanner');
-                swapImage();
-            }
-        </script>
-          
-          
-          <div>
-            <img id="imgBanner" src="" alt="" width="200" height="200" style="float: right;" />
-        </div>
-        
-          <h1><a href="index.html" id="project_title">Robyn Pan</a></h1>   <h2 id="project_tagline"></h2>
-          
-    <br><br><br><br><br><br><br>
-        </header>
-    </div>
-    
-   
-<div style="width:950px; margin:0 auto;">
-<nav>
-    <ul>
-    <li><a href="index.html">About Me</a></li>
-    <li><a href="#">Main</a></li>
-    <li><a href="smartwatch.html">SmartWatch</a></li>
-    <li><a href="solarpunkjewels.html">Jewels</a></li>  
-    <li><a href="Roses.html">RosesAreLED</a></li>  
-    <li><a href="links.html">Links</a></li>  
-      
-<a href="https://www.facebook.com/RobynFeckingPan" class="fa fa-facebook"></a>
-<a href="https://www.instagram.com/robynofalltrades/" class="fa fa-instagram"></a>
-<a href="https://twitter.com/mattblackdragon" class="fa fa-twitter"></a>
-<a href="mailto:office@robynpan.com" class="fa fa-envelope-o"></a>
-      
-  </ul>
+    .tagline {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.9;
+    }
+
+    /* NAV */
+    #site-nav {
+      display: flex;
+      border-bottom: 1px solid var(--ink);
+      overflow-x: auto;
+    }
+
+    #site-nav a, #site-nav button {
+      display: block;
+      padding: 0.8rem 1.3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      background: none;
+      border: none;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    #site-nav a:hover, #site-nav button:hover { background: var(--ink); color: var(--paper); }
+    #site-nav .nav-active { background: var(--rust); color: var(--paper); }
+
+    /* GRID VIEW */
+    #grid-view { padding: 3rem 3.5rem 5rem; }
+    #grid-view.hidden { display: none; }
+
+    .grid-intro {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+      align-items: start;
+    }
+
+    .identity-tags { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .id-tag {
+      padding: 0.2rem 0.65rem;
+      border: 1px solid var(--ink);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .id-tag:nth-child(2n) { border-color: var(--rust);  color: var(--rust); }
+    .id-tag:nth-child(3n) { border-color: var(--sage);  color: var(--sage); }
+
+    .bio-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    /* MASONRY */
+    .masonry { column-count: 3; column-gap: 1.2rem; }
+    @media (max-width: 1100px) { .masonry { column-count: 2; } }
+    @media (max-width: 640px)  { .masonry { column-count: 1; } }
+
+    /* CARD */
+    .project-card {
+      break-inside: avoid;
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--ink);
+      cursor: pointer;
+      background: var(--paper);
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .card-thumb {
+      width: 100%;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-thumb.loading {
+      background: linear-gradient(90deg, var(--cream) 25%, var(--paper) 50%, var(--cream) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+
+    .card-body { padding: 1.1rem 1.25rem 1.3rem; border-top: 1px solid var(--border); }
+    .card-category { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.4rem; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: 0.55rem; }
+    .card-excerpt { font-size: 12px; color: var(--muted); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
+
+    .tag {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .card-cta { margin-top: 1rem; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rust); display: flex; align-items: center; gap: 0.35rem; }
+    .card-cta::after { content: '→'; transition: transform 0.18s; }
+    .project-card:hover .card-cta::after { transform: translateX(5px); }
+
+    /* PROJECT VIEW */
+    #project-view {
+      display: none;
+      animation: slideIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    #project-view.hidden { display: none; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-bar {
+      padding: 1rem 4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .back-btn::before { content: '← '; }
+    .back-btn:hover { color: var(--rust); }
+
+    .project-slug { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--border); }
+
+    /* HERO: images LEFT, text RIGHT */
+    .project-hero {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      min-height: calc(100vh - 140px);
+      border-bottom: 1px solid var(--ink);
+    }
+    @media (max-width: 900px) { .project-hero { grid-template-columns: 1fr; } }
+
+    /* IMAGE COLUMN */
+    .image-column {
+      border-right: 1px solid var(--ink);
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      height: calc(100vh - 140px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-column-inner {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      flex: 1;
+    }
+
+    .project-image-wrap {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .project-image-wrap img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .project-image-wrap:hover img { transform: scale(1.03); }
+
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(90deg, var(--cream) 25%, var(--paper) 50%, var(--cream) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+
+    .image-count {
+      padding: 1rem 2rem;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* TEXT COLUMN */
+    .text-column {
+      padding: 3.5rem 4rem;
+      overflow-y: auto;
+      height: calc(100vh - 140px);
+    }
+
+    .project-meta-line { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.7rem; }
+
+    #project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    #project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    #project-tags .tag { border-color: var(--ink); color: var(--ink); font-size: 10px; }
+
+    /* Rendered markdown */
+    #project-body { font-family: 'Playfair Display', serif; font-size: 1.05rem; line-height: 1.85; max-width: 640px; }
+    #project-body h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; font-style: italic; margin: 2.5rem 0 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+    #project-body p  { margin-bottom: 1.1rem; }
+    #project-body ul { margin: 0.5rem 0 1.2rem 1.5rem; font-family: 'Space Mono', monospace; font-size: 12px; }
+    #project-body ul li { margin-bottom: 0.4rem; }
+    #project-body code { background: var(--cream); padding: 0.1rem 0.4rem; font-size: 0.85em; }
+
+    .spinner {
+      width: 24px; height: 24px;
+      border: 2px solid var(--border);
+      border-top-color: var(--rust);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 4rem auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* FOOTER */
+    #site-footer {
+      border-top: 1px solid var(--ink);
+      padding: 1.8rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .foot-name { font-family: 'Playfair Display', serif; font-style: italic; }
+    .foot-links { display: flex; gap: 1.5rem; }
+    .foot-links a { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .foot-links a:hover { color: var(--rust); }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      #site-header, #site-nav, #grid-view, .back-bar, .text-column, #site-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      #site-header { grid-template-columns: 1fr; }
+      .tagline { text-align: left; }
+      .grid-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+      .image-column { position: static; height: auto; }
+      .text-column { height: auto; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(14px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    #site-header { animation: fadeUp 0.45s ease both; }
+    #site-nav    { animation: fadeUp 0.45s ease 0.07s both; }
+    #grid-view   { animation: fadeUp 0.45s ease 0.15s both; }
+  </style>
+</head>
+<body>
+
+  <header id="site-header">
+    <div class="site-name" id="home-link">Robyn <em>Pan</em></div>
+    <div class="tagline">Hacker · Maker · Roboticist<br>Berlin / Edinburgh · she/her</div>
+  </header>
+
+  <nav id="site-nav">
+    <button id="nav-work" class="nav-active">Work</button>
+    <a href="about.html">About</a>
+    <a href="https://github.com/robynpan" target="_blank">GitHub ↗</a>
+    <a href="links.html">Links</a>
   </nav>
-    </div>
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
 
+  <main id="content">
 
-      <section id="main_content" class="inner">
-
-        <h1>About Me</h1>
-        <p>Feminist, Roboticist, Anti-Capitalist, Eccentric, Pacifist, Optimist </p>
-
-        <p>Hi! I'm Robyn; I'm somewhere between a hacker and maker. I'm a cofounder of HAEQS, a Berlin based Queer*-Feminist Hack-Collective, and I'm a student of Humanoid Robotics at The Beuth University of Applied Sciences Berlin. I'm also a member of the Edinburgh Hacklab, and was a regular face at the Metalab in Vienna before moving the Berlin in 2015.
-          </><br>
-          <p>Whether in Robotics, Wearables or Art projects, I center my projects on the fluid connection between the familiar and the new, or unfamiliar. </p>
-<!--
-        <h2>Headline 2</h2>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h3>Headline 3</h3>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h4>Headline 4</h4>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h5>Headline 5</h5>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h6>Headline 6</h6>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <p>Roses are <em>emphasized</em></br>
-        Violets are <strong>strong</strong></p>
-
-        <h3>We all like making lists</h3>
-
-        <ul>
-          <li>Red Apples</li>
-          <li>Purple Grapes</li>
-          <li>Green Kiwifruits</li>
-        </ul>
-
-        <p>Let's get crazy:</p>
-
-        <ol>
-          <li>
-            <p>This is a list item with two paragraphs. Lorem ipsum dolor
-            sit amet, consectetuer adipiscing elit. Aliquam hendrerit
-            mi posuere lectus.</p>
-
-            <p>Vestibulum enim wisi, viverra nec, fringilla in, laoreet
-            vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
-            sit amet velit.</p>
-          </li>
-          <li><p>Suspendisse id sem consectetuer libero luctus adipiscing.</p></li>
-        </ol>
-
-        <p>What about some code <strong>in</strong> a list? That's insane, right?</p>
-
-        <ol>
-          <li>
-            <p>In Ruby you can map like this:</p>
-              <code>['a', 'b'].map { |x| x.uppercase }</code>
-          </li>
-          <li>
-            <p>In Rails, you can do a shortcut:</p>
-              <code>['a', 'b'].map(&amp;:uppercase)</code>
-          </li>
-        </ol>
-
-        <p>Some people seem to like definition lists</p>
-
-        <dl>
-        <dt>Lower cost</dt>
-          <dd>The new version of this product costs significantly less than the previous one!</dd>
-          <dt>Easier to use</dt>
-          <dd>We've changed the product so that it's much easier to use!</dd>
-        </dl>
-
-        <h3>I am a robot</h3>
-
-        <p>Maybe you want to print <code>robot</code> to the console 1000 times. Why not?</p>
-<pre>
-def robot_invasion
-puts("robot " * 1000)
-end
-</pre>
-
-<p>How about we throw some angle braces and ampersands in there?</p>
-
-<pre><code>&lt;div class="footer"&gt;
-&amp;copy; 2013 Zorg Industries
-&lt;/div&gt;
-</code></pre>
-
-        <h3>If you need to blame someone, the best way to do so is by quoting them:</h3>
-
-        <blockquote>
-        <p>I, at any rate, am convinced that He does not throw dice.</p>
-        </blockquote>
-
-        <p>Or perhaps someone a little less eloquent:</p>
-
-        <blockquote>
-        <p>I wish you'd have given me this written question ahead of time so I
-        could plan for it... I'm sure something will pop into my head here in
-        the midst of this press conference, with all the pressure of trying to
-        come up with answer, but it hadn't yet...</p>
-
-        <p>I don't want to sound like
-        I have made no mistakes. I'm confident I have. I just haven't - you
-        just put me under the spot here, and maybe I'm not as quick on my feet
-        as I should be in coming up with one.</p>
-        </blockquote>
-
-        <h2>An octocat appears!</h2>
-        <img alt="an octocat!" src="http://octodex.github.com/images/octocat-de-los-muertos.jpg" />
-        <p>My favorite octocat, illustrated by <a href="https://github.com/cameronmcefee">@cameronmceffee</a>.</p>
-
-        <h2>Table for two</h2>
-
-        <table>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Rank</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Tom Preston-Werner</td>
-          <td>Awesome</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Albert Einstein</td>
-          <td>Nearly as awesome</td>
-        </tr>
-        </table>
-
-      </section>
+    <div id="grid-view">
+      <div class="grid-intro">
+        <div class="identity-tags">
+          <span class="id-tag">Feminist</span>
+          <span class="id-tag">Roboticist</span>
+          <span class="id-tag">Pacifist</span>
+          <span class="id-tag">Anti-Capitalist</span>
+          <span class="id-tag">Eccentric</span>
+          <span class="id-tag">Optimist</span>
+        </div>
+        <p class="bio-text">
+          I'm somewhere between a <strong>hacker and a maker</strong> — co-founder of <strong>HAEQS</strong>, Berlin's Queer*-Feminist Hack-Collective, and a student of Humanoid Robotics at Beuth University. I centre my work on the fluid connection between the familiar and the <em>unfamiliar</em>.
+        </p>
+      </div>
+      <div class="masonry" id="card-grid"></div>
     </div>
 
+    <div id="project-view" class="hidden">
+      <div class="back-bar">
+        <button class="back-btn" id="back-btn">All projects</button>
+        <span class="project-slug" id="project-slug"></span>
+      </div>
 
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+      <div class="project-hero">
+        <div class="image-column">
+          <div class="image-column-inner" id="image-column-inner"></div>
+          <div class="image-count" id="image-count"></div>
+        </div>
+
+        <div class="text-column">
+          <div class="project-meta-line" id="project-meta">Project</div>
+          <h1 id="project-title"></h1>
+          <div id="project-tags"></div>
+          <div id="project-body"><div class="spinner"></div></div>
+        </div>
+      </div>
     </div>
--->
 
-        
-        </body>
+  </main>
+
+  <footer id="site-footer">
+    <div class="foot-name">Robyn Pan</div>
+    <div class="foot-links">
+      <a href="https://github.com/robynpan" target="_blank">GitHub</a>
+      <a href="about.html">About</a>
+      <a href="links.html">Links</a>
+    </div>
+  </footer>
+
+  <script>
+  // ─────────────────────────────────────────────────────────────
+  // CONFIG
+  // ─────────────────────────────────────────────────────────────
+  const PROJECTS_INDEX = 'projects/projects.json';
+  const THUMB_HEIGHTS  = [180, 240, 200, 280, 210, 170, 260, 220];
+
+  // ─────────────────────────────────────────────────────────────
+  // STATE
+  // ─────────────────────────────────────────────────────────────
+  let projects      = [];
+  let projectCache  = {};
+  let currentProject = null;
+
+  // ─────────────────────────────────────────────────────────────
+  // BOOT
+  // ─────────────────────────────────────────────────────────────
+  async function init() {
+    try {
+      const res = await fetch(PROJECTS_INDEX);
+      projects  = await res.json();
+    } catch (e) {
+      document.getElementById('card-grid').innerHTML =
+        `<p style="color:var(--muted);font-size:12px;padding:1rem 0">
+           Add project folders to <code>projects/</code> and list them in
+           <code>projects/projects.json</code>.
+         </p>`;
+      return;
+    }
+
+    renderSkeletonCards();
+    await Promise.all(projects.map(loadProject));
+    renderCards();
+
+    if (location.hash) {
+      const slug = location.hash.slice(1);
+      if (projects.includes(slug)) openProject(slug);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // PARSE README.md  →  { title, tags, body }
+  //
+  // Format:
+  //   # Title
+  //   tags: Tag One, Tag Two
+  //
+  //   Body markdown here...
+  // ─────────────────────────────────────────────────────────────
+  function parseMarkdown(raw) {
+    const lines = raw.split('\n');
+    let title     = '';
+    let tags      = [];
+    let bodyStart = 0;
+
+    if (lines[0].startsWith('# ')) {
+      title     = lines[0].replace(/^#\s+/, '').trim();
+      bodyStart = 1;
+    }
+
+    for (let i = 1; i < Math.min(5, lines.length); i++) {
+      if (lines[i].toLowerCase().startsWith('tags:')) {
+        tags = lines[i]
+          .replace(/^tags:\s*/i, '')
+          .split(',')
+          .map(t => t.trim())
+          .filter(Boolean);
+        bodyStart = i + 1;
+        break;
+      }
+    }
+
+    while (bodyStart < lines.length && lines[bodyStart].trim() === '') bodyStart++;
+
+    return { title, tags, body: lines.slice(bodyStart).join('\n') };
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // LOAD one project's README + images
+  // ─────────────────────────────────────────────────────────────
+  async function loadProject(slug) {
+    let parsed = { title: slug, tags: [], body: '' };
+    try {
+      const r = await fetch(`projects/${slug}/README.md`);
+      if (r.ok) parsed = parseMarkdown(await r.text());
+    } catch (e) {}
+
+    let images = [];
+    try {
+      const r = await fetch(`projects/${slug}/images/images.json`);
+      if (r.ok) {
+        const files = await r.json();
+        images = files.map(f => `projects/${slug}/images/${f}`);
+      }
+    } catch (e) {}
+
+    projectCache[slug] = { ...parsed, images };
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // SKELETON cards (shown while data loads)
+  // ─────────────────────────────────────────────────────────────
+  function renderSkeletonCards() {
+    const grid = document.getElementById('card-grid');
+    grid.innerHTML = projects.map((slug, i) => `
+      <div class="project-card" data-slug="${slug}">
+        <div class="card-thumb loading" style="height:${THUMB_HEIGHTS[i % THUMB_HEIGHTS.length]}px"></div>
+        <div class="card-body">
+          <div style="background:var(--cream);height:10px;width:55%;border-radius:2px;margin-bottom:8px"></div>
+          <div style="background:var(--cream);height:18px;width:80%;border-radius:2px;margin-bottom:8px"></div>
+          <div style="background:var(--cream);height:32px;width:100%;border-radius:2px"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // REAL cards
+  // ─────────────────────────────────────────────────────────────
+  function renderCards() {
+    const grid = document.getElementById('card-grid');
+    grid.innerHTML = projects.map((slug, i) => {
+      const p      = projectCache[slug] || {};
+      const title  = p.title  || slug;
+      const tags   = p.tags   || [];
+      const images = p.images || [];
+
+      const excerpt = (p.body || '')
+        .replace(/#+\s+/g, '')
+        .replace(/[*_`]/g, '')
+        .replace(/\n+/g, ' ')
+        .trim()
+        .slice(0, 160);
+
+      const thumbHTML = images.length > 0
+        ? `<img src="${images[0]}" alt="${title}" loading="lazy"
+               style="width:100%;height:100%;object-fit:cover;display:block">`
+        : `<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:1rem">${slug}</span>`;
+
+      const tagsHTML = tags.slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('');
+
+      return `
+        <div class="project-card" data-slug="${slug}" tabindex="0"
+             role="button" aria-label="Open project: ${title}">
+          <div class="card-thumb" style="height:${THUMB_HEIGHTS[i % THUMB_HEIGHTS.length]}px">
+            ${thumbHTML}
+          </div>
+          <div class="card-body">
+            <div class="card-category">Project</div>
+            <div class="card-title">${title}</div>
+            ${excerpt ? `<div class="card-excerpt">${excerpt}</div>` : ''}
+            <div class="card-tags">${tagsHTML}</div>
+            <div class="card-cta">Read more</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    grid.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click',   () => openProject(card.dataset.slug));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') openProject(card.dataset.slug);
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // OPEN project
+  // ─────────────────────────────────────────────────────────────
+  function openProject(slug) {
+    const p = projectCache[slug];
+    if (!p) return;
+    currentProject = slug;
+
+    document.getElementById('project-slug').textContent = slug;
+    document.getElementById('project-title').textContent = p.title;
+    document.getElementById('project-tags').innerHTML =
+      p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    document.getElementById('project-body').innerHTML = marked.parse(p.body);
+
+    const imgCol = document.getElementById('image-column-inner');
+    if (p.images.length === 0) {
+      imgCol.innerHTML = `
+        <div style="padding:3rem 1rem;text-align:center;color:var(--muted);
+                    font-size:11px;letter-spacing:.1em;text-transform:uppercase">
+          No images yet
+        </div>`;
+      document.getElementById('image-count').textContent = '';
+    } else {
+      imgCol.innerHTML = p.images.map((src, i) => `
+        <div class="project-image-wrap">
+          <img src="${src}" alt="${p.title} — image ${i + 1}" loading="lazy">
+        </div>`).join('');
+      document.getElementById('image-count').textContent =
+        `${p.images.length} image${p.images.length !== 1 ? 's' : ''}`;
+    }
+
+    document.getElementById('grid-view').classList.add('hidden');
+    const pv = document.getElementById('project-view');
+    pv.classList.remove('hidden');
+    pv.style.display = 'block';
+    pv.style.animation = 'none';
+    requestAnimationFrame(() => { pv.style.animation = ''; });
+
+    document.querySelector('.text-column').scrollTop  = 0;
+    document.querySelector('.image-column').scrollTop = 0;
+    window.scrollTo(0, 0);
+
+    history.pushState({ slug }, '', `#${slug}`);
+    document.getElementById('nav-work').classList.remove('nav-active');
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // CLOSE project
+  // ─────────────────────────────────────────────────────────────
+  function closeProject() {
+    document.getElementById('project-view').classList.add('hidden');
+    document.getElementById('project-view').style.display = 'none';
+    document.getElementById('grid-view').classList.remove('hidden');
+    document.getElementById('nav-work').classList.add('nav-active');
+    currentProject = null;
+    history.pushState({}, '', location.pathname);
+    window.scrollTo(0, 0);
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // EVENTS
+  // ─────────────────────────────────────────────────────────────
+  document.getElementById('back-btn').addEventListener('click', closeProject);
+  document.getElementById('home-link').addEventListener('click', closeProject);
+  document.getElementById('nav-work').addEventListener('click', closeProject);
+  window.addEventListener('popstate', e => {
+    if (e.state && e.state.slug) openProject(e.state.slug);
+    else closeProject();
+  });
+
+  init();
+  </script>
+
+</body>
 </html>
