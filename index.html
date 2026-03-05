@@ -203,7 +203,7 @@
 
     .back-bar {
       padding: 1rem 4rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(55,55,55,0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -231,14 +231,14 @@
       display: grid;
       grid-template-columns: 1fr 1.4fr;
       /* No fixed height — grows with content so the page scrolls as one */
-      border-bottom: 1px solid var(--ink);
+      border-bottom: 2px solid #111;
       align-items: start; /* columns start at the top and grow independently */
     }
     @media (max-width: 900px) { .project-hero { grid-template-columns: 1fr; } }
 
     /* IMAGE COLUMN — no overflow, no sticky, no fixed height */
     .image-column {
-      border-right: 1px solid var(--ink);
+      border-right: 1px solid rgba(55,55,55,0.25);
     }
 
     .image-column-inner {
