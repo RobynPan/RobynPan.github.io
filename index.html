@@ -9,15 +9,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
   <style>
     :root {
-      --ink:    #d4d4d4;       /* light text on dark background */
-      --paper:  #2a2a2a;       /* dark content background */
-      --cream:  #333333;       /* slightly lighter inset areas */
-      --rust:   #4d9de0;       /* lighter blue — readable on dark */
-      --sage:   #7a8fa6;       /* muted blue-grey accent */
-      --muted:  #777;          /* de-emphasised text */
-      --border: rgba(255,255,255,0.1);
-      --dark:   #1a1a1a;       /* darkest — header/footer */
-      --dark2:  #212121;       /* header gradient top */
+      --ink:    #373737;
+      --paper:  #f2f2f2;
+      --cream:  #e2e2e2;
+      --rust:   #0F79D0;
+      --sage:   #555f6e;
+      --muted:  #888;
+      --border: rgba(55,55,55,0.2);
+      --dark:   #212121;
+      --dark2:  #373737;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -134,16 +134,16 @@
     .project-card {
       break-inside: avoid;
       margin-bottom: 1.2rem;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid var(--ink);
       cursor: pointer;
-      background: var(--cream);
+      background: var(--paper);
       transition: transform 0.18s, box-shadow 0.18s;
       position: relative;
       overflow: hidden;
     }
     .project-card:hover {
       transform: translate(-3px, -3px);
-      box-shadow: 6px 6px 0 rgba(255,255,255,0.15);
+      box-shadow: 6px 6px 0 var(--dark2);
     }
 
     @keyframes shimmer {
@@ -153,6 +153,7 @@
 
     .card-thumb {
       width: 100%;
+      aspect-ratio: 1 / 1;
       background: var(--cream);
       display: flex;
       align-items: center;
@@ -162,15 +163,31 @@
       color: var(--muted);
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      position: relative;
     }
-    .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* title overlay */
+    .card-thumb-title {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 1rem 0.9rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 100%);
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      z-index: 1;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
     .card-thumb.loading {
       background: linear-gradient(90deg, var(--cream) 25%, var(--paper) 50%, var(--cream) 75%);
       background-size: 200% 100%;
       animation: shimmer 1.4s infinite;
     }
 
-    .card-body { padding: 1.1rem 1.25rem 1.3rem; border-top: 1px solid var(--border); }
+    .card-body { display: none; }
     .card-category { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.4rem; }
     .card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: 0.55rem; }
     .card-excerpt { font-size: 12px; color: var(--muted); line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -226,18 +243,19 @@
 
     .project-slug { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--border); }
 
-    /* HERO: text LEFT, images RIGHT, single shared scroll */
+    /* HERO: single shared scroll container, images LEFT, text RIGHT */
     .project-hero {
       display: grid;
-      grid-template-columns: 1.4fr 1fr; /* text wider on left, images on right */
+      grid-template-columns: 1fr 1.4fr;
+      /* No fixed height — grows with content so the page scrolls as one */
       border-bottom: 2px solid #111;
-      align-items: start;
+      align-items: start; /* columns start at the top and grow independently */
     }
     @media (max-width: 900px) { .project-hero { grid-template-columns: 1fr; } }
 
-    /* IMAGE COLUMN — on the right, separated by a left border */
+    /* IMAGE COLUMN — no overflow, no sticky, no fixed height */
     .image-column {
-      border-left: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(55,55,55,0.25);
     }
 
     .image-column-inner {
@@ -381,16 +399,16 @@
       </div>
 
       <div class="project-hero">
+        <div class="image-column">
+          <div class="image-column-inner" id="image-column-inner"></div>
+          <div class="image-count" id="image-count"></div>
+        </div>
+
         <div class="text-column">
           <div class="project-meta-line" id="project-meta">Project</div>
           <h1 id="project-title"></h1>
           <div id="project-tags"></div>
           <div id="project-body"><div class="spinner"></div></div>
-        </div>
-
-        <div class="image-column">
-          <div class="image-column-inner" id="image-column-inner"></div>
-          <div class="image-count" id="image-count"></div>
         </div>
       </div>
     </div>
@@ -411,7 +429,6 @@
   // CONFIG
   // ─────────────────────────────────────────────────────────────
   const PROJECTS_INDEX = 'projects/projects.json';
-  const THUMB_HEIGHTS  = [180, 240, 200, 280, 210, 170, 260, 220];
 
   // ─────────────────────────────────────────────────────────────
   // STATE
@@ -510,14 +527,9 @@
   // ─────────────────────────────────────────────────────────────
   function renderSkeletonCards() {
     const grid = document.getElementById('card-grid');
-    grid.innerHTML = projects.map((slug, i) => `
+    grid.innerHTML = projects.map((slug) => `
       <div class="project-card" data-slug="${slug}">
-        <div class="card-thumb loading" style="height:${THUMB_HEIGHTS[i % THUMB_HEIGHTS.length]}px"></div>
-        <div class="card-body">
-          <div style="background:var(--cream);height:10px;width:55%;border-radius:2px;margin-bottom:8px"></div>
-          <div style="background:var(--cream);height:18px;width:80%;border-radius:2px;margin-bottom:8px"></div>
-          <div style="background:var(--cream);height:32px;width:100%;border-radius:2px"></div>
-        </div>
+        <div class="card-thumb loading"></div>
       </div>
     `).join('');
   }
@@ -550,15 +562,9 @@
       return `
         <div class="project-card" data-slug="${slug}" tabindex="0"
              role="button" aria-label="Open project: ${title}">
-          <div class="card-thumb" style="height:${THUMB_HEIGHTS[i % THUMB_HEIGHTS.length]}px">
+          <div class="card-thumb">
             ${thumbHTML}
-          </div>
-          <div class="card-body">
-            <div class="card-category">Project</div>
-            <div class="card-title">${title}</div>
-            ${excerpt ? `<div class="card-excerpt">${excerpt}</div>` : ''}
-            <div class="card-tags">${tagsHTML}</div>
-            <div class="card-cta">Read more</div>
+            <div class="card-thumb-title">${title}</div>
           </div>
         </div>`;
     }).join('');
