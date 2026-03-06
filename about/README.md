@@ -4,7 +4,7 @@ tags: Feminist, Roboticist, Anti-Capitalist, Eccentric, Pacifist, Optimist
 
 info:
   city: Berlin / Edinburgh
-  pronouns: she/her
+  pronouns: they/them
   email: office@robynpan.com
   facebook: facebook.com/RobynFeckingPan
   instagram: instagram.com/robynofalltrades
