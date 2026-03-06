@@ -149,15 +149,14 @@
       font-size: 1.05rem; line-height: 1.85; max-width: 640px;
     }
 
-    /* MASONRY — with horizontal buffer */
+    /* GRID — left to right, with horizontal buffer */
     #grid-view { padding: 0 2.5rem 5rem; }
-    .masonry { column-count: 3; column-gap: 0; padding-top: 2rem; }
-    @media (max-width: 1100px) { .masonry { column-count: 2; } }
-    @media (max-width: 640px)  { .masonry { column-count: 1; } }
+    .masonry { display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 2rem; }
+    @media (max-width: 1100px) { .masonry { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .masonry { grid-template-columns: 1fr; } }
 
     /* CARD */
     .project-card {
-      break-inside: avoid;
       cursor: pointer;
       background: var(--cream);
       position: relative;
