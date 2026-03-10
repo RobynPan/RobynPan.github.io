@@ -2,6 +2,7 @@
 
 tags: Robotics, Art, Performance, Interaction, Cocktails
 
+video: projects/cocktail-robot-comfort/images/MakeMeAComfort.mp4
 
 In December 2025 I joined the Roboexotica (https://roboexotica.at/), possibly the longest running cocktail-robot event in the world, with my robot "Comfort" which dispensed a comforting Margarita to visitors. 
 I was given the award for 'Best Serving' cocktail robot.
