@@ -1,7 +1,3 @@
-# robynpan.github.io
-
-Single-page site. The page never reloads — clicking a card swaps the hero panel in place.
-
 ## Folder structure
 
 ```
@@ -60,4 +56,3 @@ Each project gets a hash URL automatically:
 - `robynpan.github.io/#smartwatch`
 - `robynpan.github.io/#solarpunk-jewels`
 
-Browser back/forward works correctly.
