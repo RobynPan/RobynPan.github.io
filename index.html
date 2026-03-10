@@ -130,7 +130,7 @@
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 3rem;
-      padding: 7rem 7rem;
+      padding: 3rem 4rem;
       border-bottom: 1px solid var(--border);
       align-items: start;
       animation: fadeUp 0.45s ease 0.15s both;
@@ -222,6 +222,17 @@
       letter-spacing: 0.1em; text-transform: uppercase;
       padding: 0.15rem 0.5rem;
       border: 1px solid rgba(255,255,255,0.2); color: var(--muted);
+    }
+
+    /* VIDEO EMBED */
+    .project-video {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-video iframe {
+      width: 100%; aspect-ratio: 16/9;
+      border: none; display: block;
     }
 
     #project-body { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.85; max-width: 640px; }
@@ -492,7 +503,7 @@
   //   Body text...
   function parseMd(raw) {
     const lines = raw.split('\n');
-    let title = '', tags = [], info = {}, i = 0;
+    let title = '', tags = [], info = {}, video = '', i = 0;
 
     // Title
     if (lines[i] && lines[i].startsWith('# ')) {
@@ -503,6 +514,13 @@
     // Tags
     if (lines[i] && lines[i].toLowerCase().startsWith('tags:')) {
       tags = lines[i].replace(/^tags:\s*/i, '').split(',').map(t => t.trim()).filter(Boolean);
+      i++;
+    }
+    while (i < lines.length && lines[i].trim() === '') i++;
+
+    // Video
+    if (lines[i] && lines[i].toLowerCase().startsWith('video:')) {
+      video = lines[i].replace(/^video:\s*/i, '').trim();
       i++;
     }
     while (i < lines.length && lines[i].trim() === '') i++;
@@ -518,7 +536,7 @@
     }
     while (i < lines.length && lines[i].trim() === '') i++;
 
-    return { title, tags, info, body: lines.slice(i).join('\n') };
+    return { title, tags, info, video, body: lines.slice(i).join('\n') };
   }
 
   // Render tags as id-tag boxes
@@ -695,6 +713,21 @@
     document.getElementById('proj-slug').textContent = slug;
     document.getElementById('project-title').textContent = p.title;
     document.getElementById('project-tags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+    // Video embed (optional)
+    const existingVideo = document.getElementById('project-video');
+    if (existingVideo) existingVideo.remove();
+    if (p.video) {
+      const vDiv = document.createElement('div');
+      vDiv.id = 'project-video';
+      vDiv.className = 'project-video';
+      const isLocal = p.video.match(/\.(mp4|webm|mov)$/i);
+      vDiv.innerHTML = isLocal
+        ? `<video src="${p.video}" controls playsinline style="width:100%;display:block;"></video>`
+        : `<iframe src="${p.video}" allowfullscreen loading="lazy"></iframe>`;
+      document.getElementById('project-body').before(vDiv);
+    }
+
     document.getElementById('project-body').innerHTML = (p.body && p.body.trim())
       ? marked.parse(p.body)
       : '<p style="color:var(--muted)">No description yet.</p>';
