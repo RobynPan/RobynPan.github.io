@@ -1,6 +1,6 @@
 # Jewelry Made of PCBs
 
-tags: PCB, Jewellery, Electronics, Wearable, Solarpunk, Fabrication, HAEQS
+tags: PCB, Jewellery, Electronics, Wearable, Recycled
 
 ## The Jewels of our Age
 
